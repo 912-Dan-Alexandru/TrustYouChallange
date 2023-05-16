@@ -1,0 +1,78 @@
+create table Category(
+  id varchar(255) primary key,
+  name varchar(255) not null
+);
+
+create table Buyer(
+  id varchar(255) primary key,
+  name varchar(255) not null,
+  email varchar(255)
+);
+
+create table Author(
+  id varchar(255) primary key,
+  name varchar(255) not null
+);
+
+create table Book(
+  id varchar(255) primary key,
+  title varchar(255) not null,
+  description varchar(255),
+  price decimal(10, 2) not null
+);
+
+create table BookCategory(
+  book_id varchar(255) references Book(id),
+  category_id varchar(255) references Category(id),
+  primary key (book_id, category_id)
+);
+
+create table BookAuthor(
+  book_id varchar references Book(id),
+  author_id varchar references Author(id),
+  primary key (book_id, author_id)
+);
+
+create table BookBuyer(
+  book_id varchar references Book(id),
+  buyer_id varchar references Buyer(id),
+  primary key (book_id, buyer_id)
+);
+
+insert into Book values(1, 'Title1', 'Description1', 10.12);
+insert into Book values(2, 'Title2', 'Description2', 24.1);
+insert into Book values(3, 'Title3', 'Description3', 11);
+insert into Book values(4, 'Title4', 'Description4', 17.17);
+
+insert into Category values(1, 'Category1');
+insert into Category values(2, 'Category2');
+insert into Category values(3, 'Category3');
+insert into Category values(4, 'Category4');
+
+insert into Author values(1, 'Author1');
+insert into Author values(2, 'Author2');
+insert into Author values(3, 'Author3');
+insert into Author values(4, 'Author4');
+
+insert into Buyer values(1, 'Buyer1', 'Email1@gmail.com');
+insert into Buyer values(2, 'Buyer2', 'Email2@gmail.com');
+insert into Buyer values(3, 'Buyer3', 'Email3@yahoo.com');
+insert into Buyer values(4, 'Buyer4', 'Email4@yahoo.com');
+
+insert into BookBuyer values(1,1);
+insert into BookBuyer values(1,2);
+insert into BookBuyer values(2,1);
+insert into BookBuyer values(2,2);
+insert into BookBuyer values(3,4);
+
+insert into BookAuthor values(1,1);
+insert into BookAuthor values(2,1);
+insert into BookAuthor values(3,2);
+insert into BookAuthor values(3,3);
+insert into BookAuthor values(4,4);
+
+insert into BookCategory values(1,3);
+insert into BookCategory values(1,4);
+insert into BookCategory values(2,3);
+insert into BookCategory values(3,4);
+insert into BookCategory values(4,1);
